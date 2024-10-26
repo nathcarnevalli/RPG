@@ -1,4 +1,6 @@
 #include "Items/Item.h"
+#include "DrawDebugHelpers.h"
+#include "DebugMacros.h"
 
 AItem::AItem()
 {
@@ -8,7 +10,11 @@ AItem::AItem()
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-    //UE_LOG(LogTemp, Warning, TEXT("AItem::BeginPlay"));
+
+	const FRotator Rotation = GetActorRotation();
+	const FVector Location = GetActorLocation();
+	DRAW_SPHERE(Location, 25.f);
+	DRAW_VECTOR(Location, Location + GetActorForwardVector() * 100.f);
 }
 
 void AItem::Tick(float DeltaTime)
